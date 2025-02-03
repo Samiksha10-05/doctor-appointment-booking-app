@@ -25,14 +25,10 @@ const Appointment = () => {
     }
 
     const getAvailableSolts = async () => {
-
         setDocSlots([])
-
         // getting current date
         let today = new Date()
-
         for (let i = 0; i < 7; i++) {
-
             // getting date with index 
             let currentDate = new Date(today)
             currentDate.setDate(today.getDate() + i)
@@ -50,10 +46,7 @@ const Appointment = () => {
                 currentDate.setHours(10)
                 currentDate.setMinutes(0)
             }
-
             let timeSlots = [];
-
-
             while (currentDate < endTime) {
                 let formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -67,31 +60,26 @@ const Appointment = () => {
                 const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime) ? false : true
 
                 if (isSlotAvailable) {
-
                     // Add slot to array
                     timeSlots.push({
                         datetime: new Date(currentDate),
                         time: formattedTime
                     })
                 }
-
                 // Increment current time by 30 minutes
                 currentDate.setMinutes(currentDate.getMinutes() + 30);
             }
-
             setDocSlots(prev => ([...prev, timeSlots]))
-
         }
-
     }
 
-    const bookAppointment = async () => {
 
+
+    const bookAppointment = async () => {
         if (!token) {
             toast.warning('Login to book appointment')
             return navigate('/login')
         }
-
         const date = docSlots[slotIndex][0].datetime
 
         let day = date.getDate()
@@ -99,9 +87,7 @@ const Appointment = () => {
         let year = date.getFullYear()
 
         const slotDate = day + "_" + month + "_" + year
-
         try {
-
             const { data } = await axios.post(backendUrl + '/api/user/book-appointment', { docId, slotDate, slotTime }, { headers: { token } })
             if (data.success) {
                 toast.success(data.message)
@@ -130,6 +116,7 @@ const Appointment = () => {
         }
     }, [docInfo])
 
+    
     return docInfo ? (
         <div>
 

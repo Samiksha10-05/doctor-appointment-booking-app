@@ -12,6 +12,9 @@ const MyProfile = () => {
 
     const { token, backendUrl, userData, setUserData, loadUserProfileData } = useContext(AppContext)
 
+     // Get today's date in YYYY-MM-DD format
+     const today = new Date().toISOString().split("T")[0];
+
     // Function to update user profile data using API
     const updateUserProfileData = async () => {
 
@@ -107,8 +110,9 @@ const MyProfile = () => {
                     <p className='font-medium'>Birthday:</p>
 
                     {isEdit
-                        ? <input className='max-w-28 bg-gray-50' type='date' onChange={(e) => setUserData(prev => ({ ...prev, dob: e.target.value }))} value={userData.dob} />
+                        ? <input className='max-w-28 bg-gray-50' type='date' onChange={(e) => setUserData(prev => ({ ...prev, dob: e.target.value }))} value={userData.dob} max={today} />
                         : <p className='text-gray-500'>{userData.dob}</p>
+
                     }
 
                 </div>
