@@ -41,7 +41,7 @@
 
     <li 
     className='cursor-pointer text-sm text-black-700 border-2 border-black rounded-full py-1 px-5 hover:text-white hover:bg-primary' 
-    onClick={() => window.open('http://localhost:5174', '_blank')} 
+    onClick={() => window.open('https://doctor-appointment-booking-app-admin-hkr1.onrender.com', '_blank')} 
     >
     Admin Panel
       </li>
